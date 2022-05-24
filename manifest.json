@@ -3,5 +3,6 @@
     "title": "Finder of {{r|Ruin}}",
     "description": "Makes it easier to find the {{c|masterwork}} pistol {{r|Ruin}} of {{M|House Isner}}",
     "version": "0.0.0",
-    "author": "librarianmage"
+    "author": "librarianmage",
+    "previewImage": "icon.png"
 }
