@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<options>
+  <option ID="Books_FinderOfRuin_Color" DisplayText="&amp;MColor&amp;y hint text (requires restart)" Category="Finder of Ruin" Type="Checkbox" Default="Yes" />
+  <option ID="Books_FinderOfRuin_Capitalization" DisplayText="CAPTIALIZE hint text (requires restart)" Category="Finder of Ruin" Type="Checkbox" Default="No" />
+</options>
