@@ -12,43 +12,68 @@ namespace FinderOfRuin.HarmonyPatches
     {
         static void Postfix(ref string __result)
         {
-            String Color = Options.GetOption("Books_FinderOfRuin_Color", "No");
+            String Highlight = Options.GetOption("Books_FinderOfRuin_Highlight", "Key Words");
+            String HighlightStyle = Options.GetOption("Books_FinderOfRuin_HighlightStyle", "Colored Key Words");
             String Capitalization = Options.GetOption("Books_FinderOfRuin_Capitalization", "Default");
 
-            if (Capitalization == "Key Words")
+            if (Highlight == "Entire Clue" || Capitalization == "Entire Clue")
             {
-                __result = __result
-                    .Replace("masterwork", "MASTERWORK")
-                    .Replace("Ruin", "RUIN")
-                    .Replace("House Isner", "HOUSE ISNER");
-            }
-            else if (Capitalization == "Entire Clue") {
                 Regex rx = new Regex(@"\{(.*)\}");
-                MatchEvaluator evaluator = new MatchEvaluator(Capitalize);
+
+                Func<Match, String> match = (Match m) =>
+                {
+                    String hint = m.Captures[0].Value;
+                    if (Capitalization == "Entire Clue") { hint = hint.ToUpper(); };
+                    if (Highlight == "Entire Clue") { hint = "&Y" + hint + "&y"; }
+                    return hint;
+                };
+
+                MatchEvaluator evaluator = new MatchEvaluator(match);
                 __result = rx.Replace(__result, evaluator);
             }
 
-            if (Color == "Yes")
+            if (Highlight == "Key Words" || Capitalization == "Key Words" || (Highlight == "Entire Clue" && HighlightStyle == "Colored Key Words"))
             {
-                if (Capitalization == "Default")
+                Regex rx = new Regex(@"(masterwork|ruin|house isner)", RegexOptions.IgnoreCase);
+
+                Func<Match, String> match = (Match m) =>
                 {
-                    __result = __result
-                        .Replace("masterwork", "&cmasterwork&y")
-                        .Replace("Ruin", "&rRuin&y")
-                        .Replace("House Isner", "&MHouse Isner&y");
-                }
-                else
-                {
-                    __result = __result
-                        .Replace("MASTERWORK", "&cMASTERWORK&y")
-                        .Replace("RUIN", "&rRUIN&y")
-                        .Replace("HOUSE ISNER", "&MHOUSE ISNER&y");
-                }
+                    String hint = m.Captures[0].Value;
+                    if (Capitalization == "Key Words") { hint = hint.ToUpper(); };
+                    if (Highlight != "Default" && HighlightStyle == "Colored Key Words")
+                    {
+                        String restColor = (Highlight == "Entire Clue") ? "&Y" : "&y";
+                        String startColor;
+
+                        if (hint.ToLower() == "masterwork")
+                        {
+                            startColor = "&c";
+                        }
+                        else if (hint.ToLower() == "ruin")
+                        {
+                            startColor = "&r";
+                        }
+                        else if (hint.ToLower() == "house isner")
+                        {
+                            startColor = "&M";
+                        }
+                        else
+                        {
+                            startColor = restColor;
+                        }
+
+                        hint = startColor + hint + restColor;
+                    }
+                    else if (Highlight == "Key Words" && HighlightStyle == "White")
+                    {
+                        hint = "&Y" + hint + "&y";
+                    }
+                    return hint;
+                };
+
+                MatchEvaluator evaluator = new MatchEvaluator(match);
+                __result = rx.Replace(__result, evaluator);
             }
-
-
         }
-
-        static string Capitalize(Match m) => m.Captures[0].Value.ToUpper();
     }
 }
