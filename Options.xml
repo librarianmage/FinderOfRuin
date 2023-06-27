@@ -2,5 +2,5 @@
 <options>
   <option ID="Books_FinderOfRuin_Highlight" DisplayText="Highlight hint text" Category="Finder of Ruin" Type="Combo" Values="None,Key Words,Entire Clue" Default="Key Words"/>
   <option ID="Books_FinderOfRuin_HighlightStyle" DisplayText="Highlight color style" Category="Finder of Ruin" Type="Combo" Values="White,Colored Key Words" Default="Colored Key Words" />
-  <option ID="Books_FinderOfRuin_Capitalization" DisplayText="CAPTIALIZE hint text" Category="Finder of Ruin" Type="Combo" Values="Default,Key Words,Entire Clue" Default="Default" />
+  <option ID="Books_FinderOfRuin_Capitalization" DisplayText="CAPITALIZE hint text" Category="Finder of Ruin" Type="Combo" Values="Default,Key Words,Entire Clue" Default="Default" />
 </options>
