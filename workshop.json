@@ -4,5 +4,5 @@
   "Description": "A mod that aids in the finding of the Ruin of House Isner by making the clues a bit more obvious.\n\nThe mod offers two aids: coloring or capitalizing the hint text (key words or the entire clue).\n\nTested to work on game version 203.54\n\n[url=https://github.com/librarianmage/FinderOfRuin]Github Page[/url]",
   "Tags": "Stable,Beta,Artifact,Script",
   "Visibility": "2",
-  "ImagePath": "icon.png"
+  "ImagePath": "Assets/icon.png"
 }
