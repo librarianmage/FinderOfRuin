@@ -4,13 +4,18 @@ using System.Text.RegularExpressions;
 using XRL;
 using XRL.UI;
 
-namespace FinderOfRuin.HarmonyPatches
+namespace FinderOfRuin.Patches
 {
     [HarmonyPatch(typeof(LoreGenerator))]
     [HarmonyPatch(nameof(LoreGenerator.RuinOfHouseIsnerLore))]
     class LorePatcher
     {
         static void Postfix(ref string __result)
+        {
+            FormatSecret(ref __result);
+        }
+
+        public static void FormatSecret(ref string __result)
         {
             String Highlight = Options.GetOption("Books_FinderOfRuin_Highlight", "Key Words");
             String HighlightStyle = Options.GetOption("Books_FinderOfRuin_HighlightStyle", "Colored Key Words");
