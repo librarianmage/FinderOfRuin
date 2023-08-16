@@ -87,14 +87,14 @@ namespace FinderOfRuin.Patches
                 return code;
             }
 
-            code[callidx].operand = AccessTools.Method(typeof(SecretSmuggler), nameof(SecretSmuggler.StoreSecret));
+            code[callidx].operand = AccessTools.Method(typeof(SecretSmuggler), nameof(SecretSmuggler.SmuggleSecret));
 
             code.Insert(callidx, new CodeInstruction(OpCodes.Ldloc_1));
 
             return code;
         }
 
-        static string StoreSecret(int x, int y, int i)
+        static string SmuggleSecret(int x, int y, int i)
         {
             string secret = LoreGenerator.RuinOfHouseIsnerLore(x, y);
             StoreSecret(i, ColorUtility.StripFormatting(secret));
