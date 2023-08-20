@@ -9,6 +9,14 @@ using XRL.World.Parts;
 
 namespace FinderOfRuin.Patches
 {
+    static class Secret
+    {
+        public static string Name(int i) => $"FinderOfRuin Secret {i}";
+
+        public static bool Has(int i) => The.Game.HasStringGameState(Name(i));
+
+        //public static string GetSecret(int i)
+    }
 
     [HasWishCommand]
     [HarmonyPatch(typeof(MarkovBook))]
@@ -20,7 +28,7 @@ namespace FinderOfRuin.Patches
         static string SecretName(int i) => $"FinderOfRuin Secret {i}";
 
         static bool HasSecret(int i) => The.Game.HasStringGameState(SecretName(i));
-        static string GetSecret(int i) => The.Game.GetStringGameState(SecretName(i));
+        static string GetSecret(int i) => The.Game.GetStringGameState(SecretName(i), "NO SECRET");
         static void StoreSecret(int i, string secret) => The.Game.SetStringGameState(SecretName( i), secret);
 
         struct SmugglerState
@@ -108,7 +116,7 @@ namespace FinderOfRuin.Patches
             for (int i = 0; i < MarkovBook.NUMBER_ISNER_SECRETS; i++)
             {
                 sb.Append($"{i}. ");
-                sb.AppendLine(The.Game.GetStringGameState($"FinderOfRuin Secret {i}"));
+                sb.AppendLine(GetSecret(i));
             }
 
             XRL.UI.Popup.Show(sb.ToString(), LogMessage: false);

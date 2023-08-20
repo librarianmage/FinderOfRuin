@@ -7,6 +7,7 @@ namespace FinderOfRuin
     {
         public static string Option(string name) => $"Books_FinderOfRuin_{name}";
 
+        /// Hewwo
         public static class Formatting
         {
             public static bool Enabled => GetOption(Option("EnableFormatting"), "Yes").EqualsNoCase("Yes");
