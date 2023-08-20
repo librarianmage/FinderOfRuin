@@ -1,4 +1,3 @@
-using ConsoleLib.Console;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
