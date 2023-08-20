@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>FinderOfRuin</AssemblyName>
+    <PackageId>FinderOfRuin</PackageId>
+    <Authors>librarianmage</Authors>
   </PropertyGroup>
   <Import Project="../Mods.csproj" />
 </Project>

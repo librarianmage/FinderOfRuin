@@ -54,7 +54,6 @@ namespace FinderOfRuin.Patches
                         for (int i = 0; i < MarkovBook.NUMBER_ISNER_SECRETS; i++)
                         {
                             string secret = GetSecret(i);
-                            LorePatcher.FormatSecret(ref secret);
 
                             MarkovChain.AppendSecret(data, secret);
                         }

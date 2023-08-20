@@ -13,23 +13,27 @@ namespace FinderOfRuin
 
             public static bool Wanted => Enabled && (Highlight.Enabled || Capitalization.Enabled);
 
+            public static bool WantKeyWords => Enabled && (Highlight.WantKeyWords || Capitalization.WantKeyWords);
+
+            public static bool WantEntireClue => Enabled && (Highlight.WantEntireClue || Capitalization.WantEntireClue);
+
+            public enum Span { KeyWords, EntireClue };
+
             public static class Highlight
             {
                 public static bool Enabled => GetOption(Option("EnableHighlight"), "Yes").EqualsNoCase("Yes");
 
-                public enum HighlightSpan { KeyWords, EntireClue };
-
-                public static HighlightSpan Span {
+                public static Span Span {
                     get {
                         var span = GetOption(Option("Highlight"), "Key Words");
 
-                        if (Enum.TryParse<HighlightSpan>(span.Replace(" ", ""), out var result))
+                        if (Enum.TryParse<Span>(span.Replace(" ", ""), out var result))
                         {
                             return result;
                         }
                         else
                         {
-                            return HighlightSpan.KeyWords;
+                            return Span.KeyWords;
                         }
                     }
                 }
@@ -52,29 +56,37 @@ namespace FinderOfRuin
                         }
                     }
                 }
+
+                public static bool WantKeyWords => Enabled
+                    && (Span == Span.KeyWords
+                        || Style == HighlightStyle.ColoredKeyWords);
+
+                public static bool WantEntireClue => Enabled && Span == Span.EntireClue;
             }
 
             public static class Capitalization
             {
                 public static bool Enabled => GetOption(Option("EnableCapitalization"), "Yes").EqualsNoCase("Yes");
 
-                public enum CapitalizationSpan { KeyWords, EntireClue };
-
-                public static CapitalizationSpan Span
+                public static Span Span
                 {
                     get {
                         var span = GetOption(Option("Highlight"), "Key Words");
 
-                        if (Enum.TryParse<CapitalizationSpan>(span.Replace(" ", ""), out var result))
+                        if (Enum.TryParse<Span>(span.Replace(" ", ""), out var result))
                         {
                             return result;
                         }
                         else
                         {
-                            return CapitalizationSpan.KeyWords;
+                            return Span.KeyWords;
                         }
                     }
                 }
+
+                public static bool WantKeyWords => Enabled && Span == Span.KeyWords;
+
+                public static bool WantEntireClue => Enabled && Span == Span.EntireClue;
             }
         }
 
