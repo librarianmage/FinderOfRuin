@@ -11,7 +11,7 @@
       Adds color-based indicators to the clues.
     </helptext>
   </option>
-  <option ID="Books_FinderOfRuin_Highlight" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableHighlight==Yes" DisplayText="Span of highlight" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
+  <option ID="Books_FinderOfRuin_HighlightSpan" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableHighlight==Yes" DisplayText="Span of highlight" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
     <helptext>
       Controls which parts of the clue gets highlighted.
 
@@ -33,7 +33,7 @@
       Adds case-based indicators to the clues.
     </helptext>
   </option>
-  <option ID="Books_FinderOfRuin_Capitalization" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableCapitalization==Yes" DisplayText="Span of capitalizaton" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
+  <option ID="Books_FinderOfRuin_CapitalizationSpan" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableCapitalization==Yes" DisplayText="Span of capitalizaton" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
     <helptext>
       Controls which parts of the clue gets uppercased.
 

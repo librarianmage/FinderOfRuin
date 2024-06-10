@@ -32,7 +32,7 @@ namespace FinderOfRuin
                     GetOption(Option("EnableHighlight"), "Yes").EqualsNoCase("Yes");
 
                 public static Span Span =>
-                    GetOption(Option("Highlight"), "Key Words") switch
+                    GetOption(Option("HighlightSpan")) switch
                     {
                         "Key Words" => Span.KeyWords,
                         "Entire Clue" => Span.EntireClue,
@@ -46,7 +46,7 @@ namespace FinderOfRuin
                 };
 
                 public static HighlightStyle Style =>
-                    GetOption(Option("HighlightStyle"), "Colored Key Words") switch
+                    GetOption(Option("HighlightStyle")) switch
                     {
                         "All White" => HighlightStyle.AllWhite,
                         "Colored Key Words" => HighlightStyle.ColoredKeyWords,
@@ -65,7 +65,7 @@ namespace FinderOfRuin
                     GetOption(Option("EnableCapitalization"), "Yes").EqualsNoCase("Yes");
 
                 public static Span Span =>
-                    GetOption(Option("Capitalization"), "Key Words") switch
+                    GetOption(Option("CapitalizationSpan")) switch
                     {
                         "Key Words" => Span.KeyWords,
                         "Entire Clue" => Span.EntireClue,
