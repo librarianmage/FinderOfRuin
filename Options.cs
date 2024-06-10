@@ -90,10 +90,5 @@ namespace FinderOfRuin
                 public static bool WantEntireClue => Enabled && Span == Span.EntireClue;
             }
         }
-
-        public static class SecretSmuggler
-        {
-            public static bool Enabled => GetOption(Option("EnableSmuggling"), "Yes").EqualsNoCase("Yes");
-        }
     }
 }
