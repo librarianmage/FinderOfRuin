@@ -13,10 +13,10 @@
   </option>
   <option ID="Books_FinderOfRuin_Highlight" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableHighlight==Yes" DisplayText="Span of highlight" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
     <helptext>
-      Controls which parts of the clue gets colored.
+      Controls which parts of the clue gets highlighted.
 
-      {{W|Key Words}}: The phrases "masterwork", "Ruin", and "House Isner" will be colored.
-      {{W|Entire Clue}}: The entire clue phrase will be colored.
+      {{W|Key Words}}: The phrases "masterwork", "Ruin", and "House Isner" will be highlighted.
+      {{W|Entire Clue}}: The entire clue phrase will be highlighted.
     </helptext>
   </option>
   <option ID="Books_FinderOfRuin_HighlightStyle" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableHighlight==Yes" DisplayText="Highlight color style" Category="Finder of Ruin" Type="Combo" Values="All White,Colored Key Words" Default="Colored Key Words">
@@ -39,17 +39,6 @@
 
       {{W|Key Words}}: The phrases "MASTERWORK", "RUIN", and "HOUSE ISNER" will be uppercased.
       {{W|Entire Clue}}: The entire clue phrase will be uppercased.
-    </helptext>
-  </option>
-
-  <option ID="Books_FinderOfRuin_EnableSmuggling" DisplayText="Enable hint persistence patch" Category="Finder of Ruin" Type="Checkbox" Default="Yes">
-    <helptext>
-      Resolves {{c|#8034}} on the public tracker, in which reloading a save removes all clues from the corpus.
-      Also enables changing formatting style when reloading a save.
-
-      If you enable this on an old save, this will generate new clues.
-
-      {{W|You may need to restart when changing this option in order for changes to take effect.}}
     </helptext>
   </option>
 </options>
