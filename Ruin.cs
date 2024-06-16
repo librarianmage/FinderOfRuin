@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using HarmonyLib;
@@ -16,32 +15,35 @@ namespace FinderOfRuin.Patches
             IEnumerable<CodeInstruction> instructions
         )
         {
-            var code = new List<CodeInstruction>(instructions);
+            var codeMatcher = new CodeMatcher(instructions);
 
-            // Replace regex to only accept balanced {}s
-            var regexidx = code.FindIndex(x => x.Is(OpCodes.Ldstr, "{.*?}"));
+            // replace regex to only accept balanced {}s and match the outermost pair
 
-            if (regexidx == -1)
+            codeMatcher.MatchStartForward(new CodeMatch(OpCodes.Ldstr, "{.*?}"));
+
+            if (codeMatcher.IsInvalid)
             {
-                UnityEngine.Debug.Log("Regex not found!");
+                UnityEngine.Debug.LogError("FinderOfRuin: Cannot find regex pattern");
                 return instructions;
             }
 
-            code[regexidx].operand = LoreFormatter.CluePattern;
+            codeMatcher.SetOperandAndAdvance(LoreFormatter.CluePattern);
 
-            // Remove outer {}s from secretNugget
+            // remove outer {}s from secretNugget (getting
 
-            var stargsidx = code.FindIndex(x => x.IsStarg());
+            codeMatcher
+                .MatchEndForward(new CodeMatch(instruction => instruction.IsStarg()))
+                .Advance(1);
 
-            if (stargsidx == -1)
+            if (codeMatcher.IsInvalid)
             {
-                UnityEngine.Debug.Log("starg not found!");
+                UnityEngine.Debug.LogError("FinderOfRuin: Cannot find starg anchor");
                 return instructions;
             }
 
-            code.InsertRange(
-                stargsidx + 1,
-                new List<CodeInstruction>
+            // secretNugget = HeaderMatches.Groups[1].Value;
+            codeMatcher.InsertAndAdvance(
+                new CodeInstruction[]
                 {
                     new CodeInstruction(OpCodes.Ldloc_1),
                     new CodeInstruction(
@@ -65,39 +67,29 @@ namespace FinderOfRuin.Patches
                 }
             );
 
-            // Prevent stripping of {}s
+            // prevent stripping of formatting brackets
 
-            var stripidxs = code.Select((x, i) => new { x, i })
-                .Where(
-                    z =>
-                        (z.x.Is(OpCodes.Ldstr, "{") || z.x.Is(OpCodes.Ldstr, "}"))
-                        && z.i + 2 < code.Count
-                        && code[z.i + 1].Is(OpCodes.Ldstr, "")
-                        && code[z.i + 2].Calls(
-                            AccessTools.Method(
-                                typeof(string),
-                                nameof(String.Replace),
-                                new[] { typeof(string), typeof(string) }
+            codeMatcher
+                .MatchStartForward(
+                    new CodeMatch(
+                        instruction =>
+                            instruction.Is(OpCodes.Ldstr, "{") || instruction.Is(OpCodes.Ldstr, "}")
+                    ),
+                    new CodeMatch(OpCodes.Ldstr, ""),
+                    new CodeMatch(
+                        instruction =>
+                            instruction.Calls(
+                                AccessTools.Method(
+                                    typeof(string),
+                                    nameof(String.Replace),
+                                    new[] { typeof(string), typeof(string) }
+                                )
                             )
-                        )
+                    )
                 )
-                .Select(z => z.i)
-                .ToList();
+                .Repeat(codeMatcher => codeMatcher.RemoveInstructions(3));
 
-            // if (stripidxs.Count == 0)
-            // {
-            //     UnityEngine.Debug.Log("stripping not found!");
-            //     return code; // not essential to functioning
-            // }
-
-            stripidxs.Reverse();
-
-            foreach (var idx in stripidxs)
-            {
-                code.RemoveRange(idx, 3);
-            }
-
-            return code;
+            return codeMatcher.InstructionEnumeration();
         }
     }
 
