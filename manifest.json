@@ -1,8 +1,8 @@
 {
-    "id": "FinderOfRuin",
-    "title": "Finder of {{r|Ruin}}",
-    "description": "Makes it easier to find the {{c|masterwork}} pistol {{r|Ruin}} of {{M|House Isner}}. See Options > Finder of Ruin for customization.",
-    "version": "1.1",
-    "author": "librarianmage",
-    "previewImage": "icon.png"
+  "id": "FinderOfRuin",
+  "title": "{{M|Finder}} {{c|of}} {{r|Ruin}}",
+  "description": "Makes it easier to find the {{c|masterwork}} pistol {{r|Ruin}} of {{M|House Isner}}. See {{W|Options}} {{y|>}} {{c|Finder of Ruin}} for customization.",
+  "version": "1.3",
+  "author": "{{R|librarianmage}}",
+  "previewImage": "Assets/icon.png"
 }

@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <options>
-  <option ID="Books_FinderOfRuin_Highlight" DisplayText="Highlight hint text" Category="Finder of Ruin" Type="Combo" Values="None,Key Words,Entire Clue" Default="Key Words"/>
-  <option ID="Books_FinderOfRuin_HighlightStyle" DisplayText="Highlight color style" Category="Finder of Ruin" Type="Combo" Values="White,Colored Key Words" Default="Colored Key Words" />
-  <option ID="Books_FinderOfRuin_Capitalization" DisplayText="CAPTIALIZE hint text" Category="Finder of Ruin" Type="Combo" Values="Default,Key Words,Entire Clue" Default="Default" />
+  <option ID="Books_FinderOfRuin_EnableFormatting" DisplayText="Enable clue formatting" Category="Finder of Ruin" Type="Checkbox" Default="Yes">
+    <helptext>
+      Add visual indicators to the Ruin of House Isner clues, found in white-titled books.
+    </helptext>
+  </option>
+
+  <option ID="Books_FinderOfRuin_EnableHighlight" Requires="Books_FinderOfRuin_EnableFormatting==Yes" DisplayText="Enable hint text highlighting" Category="Finder of Ruin" Type="Checkbox" Default="Yes">
+    <helptext>
+      Adds color-based indicators to Ruin of Isner clues.
+    </helptext>
+  </option>
+  <option ID="Books_FinderOfRuin_HighlightSpan" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableHighlight==Yes" DisplayText="Span of highlight" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
+    <helptext>
+      Controls which parts of the clue gets highlighted.
+
+      {{W|Key Words}}: The phrases "masterwork", "Ruin", and "House Isner" will be highlighted.
+      {{W|Entire Clue}}: The entire clue phrase will be highlighted.
+    </helptext>
+  </option>
+  <option ID="Books_FinderOfRuin_HighlightStyle" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableHighlight==Yes" DisplayText="Highlight color style" Category="Finder of Ruin" Type="Combo" Values="Only White,Colored Key Words" Default="Colored Key Words">
+    <helptext>
+      Controls how the clue gets colored.
+
+      {{W|Only White}}: The above span will be colored in {{Y|a brighter white}}.
+      {{W|Colored Key Words}}: The phrases "{{c|masterwork}}", "{{r|Ruin}}", and "{{M|House Isner}}" will be colored distinctively, while the rest of the span will be in a {{Y|brighter white}}.
+    </helptext>
+  </option>
+
+  <option ID="Books_FinderOfRuin_EnableUppercasing" Requires="Books_FinderOfRuin_EnableFormatting==Yes" DisplayText="Enable uppercasing hint text" Category="Finder of Ruin" Type="Checkbox" Default="No">
+    <helptext>
+      Adds case-based indicators to Ruin of Isner clues.
+    </helptext>
+  </option>
+  <option ID="Books_FinderOfRuin_UppercasingSpan" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableUppercasing==Yes" DisplayText="Span of uppercasing" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
+    <helptext>
+      Controls which parts of the clue gets uppercased.
+
+      {{W|Key Words}}: The phrases "MASTERWORK", "RUIN", and "HOUSE ISNER" will be uppercased.
+      {{W|Entire Clue}}: The entire clue phrase will be uppercased.
+    </helptext>
+  </option>
+  <option ID="Books_FinderOfRuin_OptionsVersion" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableFormatting==No" Category="Finder of Ruin" Type="Slider" Default="0">
+  </option>
 </options>
