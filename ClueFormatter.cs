@@ -44,12 +44,12 @@ namespace FinderOfRuin
         /// <returns>
         ///   The formatted match.
         /// </returns>
-        /// <param name="clueMatch">
+        /// <param name="ClueMatch">
         ///   A <see cref="Match"/> of the inside of a clue.
         /// </param>
-        public static string FormatClueInner(Match clueMatch)
+        public static string FormatClueInner(Match ClueMatch)
         {
-            var clue = clueMatch.Value;
+            var clue = ClueMatch.Value;
 
             if (!WantEntireClue)
             {
@@ -58,18 +58,21 @@ namespace FinderOfRuin
 
             if (Highlight.WantEntireClue)
             {
-                var style = Highlight.Style;
-
-                clue = Highlight.Style switch {
+                clue = Highlight.Style switch
+                {
                     Highlight.HighlightStyle.AllWhite => Markup.Color("Y", clue),
                     Highlight.HighlightStyle.ColoredKeyWords => Markup.Color("Y", clue),
-                    _ => throw new ArgumentOutOfRangeException(nameof(Highlight.HighlightStyle), $"Unexpected highlight style: {Highlight.Style}")
+                    _
+                        => throw new ArgumentOutOfRangeException(
+                            nameof(Highlight.HighlightStyle),
+                            $"Finder of Ruin: Unexpected highlight style: {Highlight.Style}"
+                        )
                 };
             }
 
             if (Capitalization.WantEntireClue)
             {
-                ColorUtility.CapitalizeExceptFormatting(clue);
+                clue = ColorUtility.CapitalizeExceptFormatting(clue);
             }
 
             return clue;
@@ -104,45 +107,33 @@ namespace FinderOfRuin
         /// <returns>
         ///   The formatted match.
         /// </returns>
-        /// <param name="keyWordMatch">
+        /// <param name="KeyWordMatch">
         ///   A <see cref="Match"/> of a key word.
         /// </param>
-        public static string FormatKeyWords(Match keyWordMatch)
+        public static string FormatKeyWords(Match KeyWordMatch)
         {
-            var keyWord = keyWordMatch.Value;
+            var keyWord = KeyWordMatch.Value;
 
             if (!WantKeyWords)
             {
                 return keyWord;
             }
 
-            if (WantKeyWords)
+            if (Highlight.WantKeyWords)
             {
-                var style = Highlight.Style;
-
-                switch (style)
+                keyWord = Highlight.Style switch
                 {
-                    case Highlight.HighlightStyle.AllWhite:
-                        keyWord = Markup.Color("Y", keyWord);
-                        break;
-
-                    case Highlight.HighlightStyle.ColoredKeyWords:
-                        string color;
-                        if (KeyWordColors.TryGetValue(keyWord, out color))
-                        {
-                            keyWord = Markup.Color(color, keyWord);
-                        }
-                        else
-                        {
-                            UnityEngine.Debug.LogWarning($"Keyword not found: {keyWord}");
-                        }
-
-                        break;
-
-                    default:
-                        UnityEngine.Debug.LogError($"Unknown highlight style: {style}");
-                        break;
-                }
+                    Highlight.HighlightStyle.AllWhite => Markup.Color("Y", keyWord),
+                    Highlight.HighlightStyle.ColoredKeyWords
+                        => KeyWordColors.TryGetValue(keyWord, out var color)
+                            ? Markup.Color(color, keyWord)
+                            : keyWord,
+                    _
+                        => throw new ArgumentOutOfRangeException(
+                            nameof(Highlight.HighlightStyle),
+                            $"Finder of Ruin: Unexpected highlight style: {Highlight.Style}"
+                        )
+                };
             }
 
             if (Capitalization.WantKeyWords)
@@ -154,27 +145,27 @@ namespace FinderOfRuin
         }
 
         ///<summary>Formats an Isner clue.</summary>
-        ///<remarks>For use in <see cref="Patches.LoreFormatterPatch"/></remarks>
-        public static string FormatLore(string lore)
+        ///<remarks>For use in <see cref="Patches.LoreFormatterPatch"/>.</remarks>
+        public static string FormatLore(string Lore)
         {
             if (!Wanted)
             {
-                return lore;
+                return Lore;
             }
 
             if (WantKeyWords)
             {
                 var keyWordMatcher = new MatchEvaluator(FormatKeyWords);
-                lore = KeyWordRegex.Replace(lore, keyWordMatcher);
+                Lore = KeyWordRegex.Replace(Lore, keyWordMatcher);
             }
 
             if (WantEntireClue)
             {
                 var clueMatcher = new MatchEvaluator(FormatClueInner);
-                lore = ClueInnerRegex.Replace(lore, clueMatcher);
+                Lore = ClueInnerRegex.Replace(Lore, clueMatcher);
             }
 
-            return lore;
+            return Lore;
         }
     }
 }

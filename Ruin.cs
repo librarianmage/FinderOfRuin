@@ -12,10 +12,10 @@ namespace FinderOfRuin.Patches
     internal static class FormattingPatcher
     {
         private static IEnumerable<CodeInstruction> Transpiler(
-            IEnumerable<CodeInstruction> instructions
+            IEnumerable<CodeInstruction> Instructions
         )
         {
-            var codeMatcher = new CodeMatcher(instructions);
+            var codeMatcher = new CodeMatcher(Instructions);
 
             // replace regex to only accept balanced {}s and match the outermost pair
 
@@ -24,7 +24,7 @@ namespace FinderOfRuin.Patches
             if (codeMatcher.IsInvalid)
             {
                 UnityEngine.Debug.LogError("FinderOfRuin: Cannot find regex pattern");
-                return instructions;
+                return Instructions;
             }
 
             codeMatcher.SetOperandAndAdvance(LoreFormatter.CluePattern);
@@ -32,13 +32,13 @@ namespace FinderOfRuin.Patches
             // remove outer {}s from secretNugget (getting
 
             codeMatcher
-                .MatchEndForward(new CodeMatch(instruction => instruction.IsStarg()))
+                .MatchEndForward(new CodeMatch(Instruction => Instruction.IsStarg()))
                 .Advance(1);
 
             if (codeMatcher.IsInvalid)
             {
                 UnityEngine.Debug.LogError("FinderOfRuin: Cannot find starg anchor");
-                return instructions;
+                return Instructions;
             }
 
             // secretNugget = HeaderMatches.Groups[1].Value;
@@ -72,13 +72,13 @@ namespace FinderOfRuin.Patches
             codeMatcher
                 .MatchStartForward(
                     new CodeMatch(
-                        instruction =>
-                            instruction.Is(OpCodes.Ldstr, "{") || instruction.Is(OpCodes.Ldstr, "}")
+                        Instruction =>
+                            Instruction.Is(OpCodes.Ldstr, "{") || Instruction.Is(OpCodes.Ldstr, "}")
                     ),
                     new CodeMatch(OpCodes.Ldstr, ""),
                     new CodeMatch(
-                        instruction =>
-                            instruction.Calls(
+                        Instruction =>
+                            Instruction.Calls(
                                 AccessTools.Method(
                                     typeof(string),
                                     nameof(String.Replace),
@@ -87,7 +87,7 @@ namespace FinderOfRuin.Patches
                             )
                     )
                 )
-                .Repeat(codeMatcher => codeMatcher.RemoveInstructions(3));
+                .Repeat(CodeMatcher => CodeMatcher.RemoveInstructions(3));
 
             return codeMatcher.InstructionEnumeration();
         }
@@ -97,10 +97,6 @@ namespace FinderOfRuin.Patches
     [HarmonyPatch(nameof(MarkovChain.AppendSecret))]
     internal static class LoreFormatterPatch
     {
-        private static void Prefix(
-            MarkovChainData Data,
-            ref string Secret,
-            bool addOpeningWords = false
-        ) => Secret = LoreFormatter.FormatLore(Secret);
+        private static void Prefix(ref string Secret) => Secret = LoreFormatter.FormatLore(Secret);
     }
 }

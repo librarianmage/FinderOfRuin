@@ -4,9 +4,8 @@ namespace FinderOfRuin
 {
     public static class Options
     {
-        private static string Option(string name) => $"Books_FinderOfRuin_{name}";
+        private static string Option(string Name) => $"Books_FinderOfRuin_{Name}";
 
-        /// Hewwo
         public static class Formatting
         {
             public static bool Enabled =>
