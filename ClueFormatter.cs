@@ -72,7 +72,7 @@ namespace FinderOfRuin
 
             if (Uppercasing.WantEntireClue)
             {
-                clue = ColorUtility.CapitalizeExceptFormatting(clue);
+                clue = ColorUtility.ToUpperExceptFormatting(clue);
             }
 
             return clue;

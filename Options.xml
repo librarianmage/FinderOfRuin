@@ -33,12 +33,14 @@
       Adds case-based indicators to Ruin of Isner clues.
     </helptext>
   </option>
-  <option ID="Books_FinderOfRuin_UppercasingSpan" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableCapitalization==Yes" DisplayText="Span of uppercasing" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
+  <option ID="Books_FinderOfRuin_UppercasingSpan" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableUppercasing==Yes" DisplayText="Span of uppercasing" Category="Finder of Ruin" Type="Combo" Values="Key Words,Entire Clue" Default="Key Words">
     <helptext>
       Controls which parts of the clue gets uppercased.
 
       {{W|Key Words}}: The phrases "MASTERWORK", "RUIN", and "HOUSE ISNER" will be uppercased.
       {{W|Entire Clue}}: The entire clue phrase will be uppercased.
     </helptext>
+  </option>
+  <option ID="Books_FinderOfRuin_OptionsVersion" Requires="Books_FinderOfRuin_EnableFormatting==Yes,Books_FinderOfRuin_EnableFormatting==No" Category="Finder of Ruin" Type="Slider" Default="0">
   </option>
 </options>
