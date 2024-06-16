@@ -70,7 +70,7 @@ namespace FinderOfRuin
                 };
             }
 
-            if (Capitalization.WantEntireClue)
+            if (Uppercasing.WantEntireClue)
             {
                 clue = ColorUtility.CapitalizeExceptFormatting(clue);
             }
@@ -136,9 +136,9 @@ namespace FinderOfRuin
                 };
             }
 
-            if (Capitalization.WantKeyWords)
+            if (Uppercasing.WantKeyWords)
             {
-                keyWord = ColorUtility.CapitalizeExceptFormatting(keyWord);
+                keyWord = ColorUtility.ToUpperExceptFormatting(keyWord);
             }
 
             return keyWord;

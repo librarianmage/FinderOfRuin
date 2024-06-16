@@ -11,13 +11,13 @@ namespace FinderOfRuin
             public static bool Enabled =>
                 GetOption(Option("EnableFormatting"), "Yes").EqualsNoCase("Yes");
 
-            public static bool Wanted => Enabled && (Highlight.Enabled || Capitalization.Enabled);
+            public static bool Wanted => Enabled && (Highlight.Enabled || Uppercasing.Enabled);
 
             public static bool WantKeyWords =>
-                Enabled && (Highlight.WantKeyWords || Capitalization.WantKeyWords);
+                Enabled && (Highlight.WantKeyWords || Uppercasing.WantKeyWords);
 
             public static bool WantEntireClue =>
-                Enabled && (Highlight.WantEntireClue || Capitalization.WantEntireClue);
+                Enabled && (Highlight.WantEntireClue || Uppercasing.WantEntireClue);
 
             public enum Span
             {
@@ -40,14 +40,14 @@ namespace FinderOfRuin
 
                 public enum HighlightStyle
                 {
-                    AllWhite,
+                    OnlyWhite,
                     ColoredKeyWords
                 };
 
                 public static HighlightStyle Style =>
                     GetOption(Option("HighlightStyle")) switch
                     {
-                        "All White" => HighlightStyle.AllWhite,
+                        "Only White" => HighlightStyle.OnlyWhite,
                         "Colored Key Words" => HighlightStyle.ColoredKeyWords,
                         _ => HighlightStyle.ColoredKeyWords
                     };
@@ -58,13 +58,13 @@ namespace FinderOfRuin
                 public static bool WantEntireClue => Enabled && Span == Span.EntireClue;
             }
 
-            public static class Capitalization
+            public static class Uppercasing
             {
                 public static bool Enabled =>
-                    GetOption(Option("EnableCapitalization"), "Yes").EqualsNoCase("Yes");
+                    GetOption(Option("EnableUppercasing"), "Yes").EqualsNoCase("Yes");
 
                 public static Span Span =>
-                    GetOption(Option("CapitalizationSpan")) switch
+                    GetOption(Option("UppercasingSpan")) switch
                     {
                         "Key Words" => Span.KeyWords,
                         "Entire Clue" => Span.EntireClue,
