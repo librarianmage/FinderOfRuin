@@ -60,7 +60,7 @@ namespace FinderOfRuin
             {
                 clue = Highlight.Style switch
                 {
-                    Highlight.HighlightStyle.AllWhite => Markup.Color("Y", clue),
+                    Highlight.HighlightStyle.OnlyWhite => Markup.Color("Y", clue),
                     Highlight.HighlightStyle.ColoredKeyWords => Markup.Color("Y", clue),
                     _
                         => throw new ArgumentOutOfRangeException(
@@ -123,7 +123,7 @@ namespace FinderOfRuin
             {
                 keyWord = Highlight.Style switch
                 {
-                    Highlight.HighlightStyle.AllWhite => Markup.Color("Y", keyWord),
+                    Highlight.HighlightStyle.OnlyWhite => Markup.Color("Y", keyWord),
                     Highlight.HighlightStyle.ColoredKeyWords
                         => KeyWordColors.TryGetValue(keyWord, out var color)
                             ? Markup.Color(color, keyWord)
