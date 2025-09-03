@@ -5,7 +5,7 @@ The mod offers two aids: coloring or uppercasing the hint text (key words or the
 
 Tested to work on game version 207.71
 
-[Github Page](https://github.com/librarianmage/FinderOfRuin) \| [Workshop Page](https://steamcommunity.com/sharedfiles/filedetails/?id=2812261314) \| [My Caves of Qud Mods (Steam Workshop)](https://steamcommunity.com/profiles/76561198836298826/myworkshopfiles/?appid=333640)
+[Codeberg Page](https://codeberg.org/librarianmage/FinderOfRuin) \| [Workshop Page](https://steamcommunity.com/sharedfiles/filedetails/?id=2812261314) \| [My Caves of Qud Mods (Steam Workshop)](https://steamcommunity.com/profiles/76561198836298826/myworkshopfiles/?appid=333640)
 
 ## Installation
 

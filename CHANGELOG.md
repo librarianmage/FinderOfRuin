@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+Meta:
+
+* Moved to Codeberg
+
 ## v1.3 — 2024-06-16
 Tested to work on game version 207.71
 

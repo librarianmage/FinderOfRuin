@@ -1,7 +1,7 @@
 {
   "WorkshopId": 2812261314,
   "Title": "Finder of Ruin",
-  "Description": "A mod that aids in the finding of the Ruin of House Isner by making the clues a bit more obvious.\n\nThe mod offers two aids: coloring or uppercasing the hint text (key words or the entire clue).\n\nTested to work on game version 207.71\n\n[url=https://github.com/librarianmage/FinderOfRuin]Source Code (GitHub)[/url]",
+  "Description": "A mod that aids in the finding of the Ruin of House Isner by making the clues a bit more obvious.\n\nThe mod offers two aids: coloring or uppercasing the hint text (key words or the entire clue).\n\nTested to work on game version 207.71\n\n[url=https://codeberg.org/librarianmage/FinderOfRuin]Source Code (Codeberg)[/url]",
   "Tags": "Stable,Beta,Artifact,Script",
   "Visibility": "2",
   "ImagePath": "Assets/icon.png"
